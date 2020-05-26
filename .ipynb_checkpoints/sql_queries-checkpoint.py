@@ -9,7 +9,7 @@ time_table_drop = "DROP table IF EXISTS time_table"
 # CREATE TABLES
 
 songplay_table_create = ("""
-CREATE TABLE IF NOT EXISTS songplay_table (songplay_id varchar, start_time numeric, user_id int, level varchar, song_id varchar, artist_id int, session_id int, location varchar, user_agent varchar);""")
+CREATE TABLE IF NOT EXISTS songplay_table (songplay_id varchar, start_time timestamp, user_id int, level varchar, song_id varchar, artist_id int, session_id int, location varchar, user_agent varchar);""")
 
 user_table_create = ("""CREATE TABLE IF NOT EXISTS user_table (user_id int, first_name varchar, last_name varchar, gender varchar, level varchar);""")
 
@@ -38,8 +38,15 @@ time_table_insert = ("""INSERT INTO time_table (start_time, hour, day, week, mon
 VALUES (%s,%s,%s,%s,%s,%s,%s)""")
 
 # FIND SONGS
+# timestamp, user ID, level, song ID, artist ID, session ID, location, and user agent
 
-song_select = ("""SELECT * FROM song_table""")
+song_select = ("""SELECT s.song_id,a.artist_id FROM (song_table s JOIN artist_table AS a ON a.artist_id= s.artist_id) WHERE s.title=%s AND a.name= %s AND s.duration=%s GROUP BY s.song_id, a.artist_id""")
+
+
+#Since the log file does not specify an ID for either the song or the artist, you'll need to get the song ID and artist ID by querying the songs and artists tables to find matches based on song title, artist name, and song duration time.
+
+#    Implement the song_select query in sql_queries.py to find the song ID and artist ID based on the title, artist name, and duration of a song.
+#    Select the timestamp, user ID, level, song ID, artist ID, session ID, location, and user agent and set to songplay_data
 
 # QUERY LISTS
 
