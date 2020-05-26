@@ -9,7 +9,7 @@ time_table_drop = "DROP table IF EXISTS time_table"
 # CREATE TABLES
 
 songplay_table_create = ("""
-CREATE TABLE IF NOT EXISTS songplay_table (songplay_id varchar, start_time timestamp, user_id int, level varchar, song_id varchar, artist_id int, session_id int, location varchar, user_agent varchar);""")
+CREATE TABLE IF NOT EXISTS songplay_table (songplay_id varchar, start_time timestamp, user_id int, level varchar, song_id varchar, artist_id varchar, session_id int, location varchar, user_agent varchar);""")
 
 user_table_create = ("""CREATE TABLE IF NOT EXISTS user_table (user_id int, first_name varchar, last_name varchar, gender varchar, level varchar);""")
 
