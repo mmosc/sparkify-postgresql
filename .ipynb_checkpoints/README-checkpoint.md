@@ -83,4 +83,13 @@ This function is applied to each ```.json``` file representing the activity on t
 1. Run ```create_tables.py``` to create the ```sparkifydb```. This is the database to which the other files connect.
 2. Run ```etl.py``` process the data and insert them into the database.
 ### Queries
-Example queries for each of the tables can be found in the ```test.ipynb``` file. As additional example, here's a query for what songs  
+Example queries for each of the tables can be found in the ```test.ipynb``` file. As additional example, here's a query for checking on which day of the week a specific song, displayed by title, was played
+```
+SELECT  s.title, t.weekday 
+FROM songplay_table AS sp JOIN song_table AS s ON sp.song_id=s.song_id
+                        JOIN time_table AS t ON sp.start_time=t.start_time
+```
+This should return 
+| title         | weekday       |
+| ------------- |:-------------:| 
+| Setanta matins|2              |
