@@ -6,6 +6,12 @@ from sql_queries import *
 import datetime
 
 def process_song_file(cur, filepath):
+    '''
+    Reads the  elements of the song dataset, extracts data and inserts them into the songs and artists table
+    
+    Accepts:
+    cur: database cursor
+    filepath: path to the .json file'''
     # open song file
     df = pd.read_json(filepath,lines=True)
 
@@ -21,6 +27,12 @@ def process_song_file(cur, filepath):
 
 
 def process_log_file(cur, filepath):
+    '''
+    Reads the  elements of the log dataset, extracts data and inserts them into the times, users and songplays
+    
+    Accepts:
+    cur: database cursor
+    filepath: path to the .json file'''
     # open log file
     df = pd.read_json(filepath,lines=True)
 
@@ -67,12 +79,20 @@ def process_log_file(cur, filepath):
 
         # insert songplay record
 
-    Discuss the purpose of this database in the context of the startup, Sparkify, and 
-        songplay_data = (index,row.ts_date,row.userId,row.level,songid, artistid,row.sessionId,row.location,row.userAgent)
+        songplay_data = (row.ts_date,row.userId,row.level,songid, artistid,row.sessionId,row.location,row.userAgent)
         cur.execute(songplay_table_insert, songplay_data)
 
 
 def process_data(cur, conn, filepath, func):
+    '''
+    Extract data from the directories containing each record of the activity/songs and inserts them into the tables
+    
+    Accepts:
+    cur: database cursor
+    conn: connection to the database
+    filepath: path to the directory containing the records
+    func: function to apply, depending on which type of records are to be processed. Can be either process_song_file or process_log_file
+    '''
     # get all files matching extension from directory
     all_files = []
     for root, dirs, files in os.walk(filepath):
