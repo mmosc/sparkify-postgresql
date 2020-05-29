@@ -55,7 +55,7 @@ The Database schema contains the following tables
 5. **time** - timestamps of records in **songplays** broken down into specific units
 * *start_time, hour, day, week, month, year, weekday
 It is organised as a start schema, that simplifies queries about user activities. The Entity Relation Diagram is as follows
-![alt text](./sparkify_schema_2.png)
+![alt text](./sparkify_schema.png)
 
 The diagram is generated using [Visual Paradigm](https://online.visual-paradigm.com/diagrams/features/erd-tool/). Primary keys are in bold font. I did not manage to do-undo italics to distinguish numerical entries...
 
