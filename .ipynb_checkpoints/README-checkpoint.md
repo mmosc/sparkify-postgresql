@@ -54,14 +54,28 @@ The Database schema contains the following tables
 * *artist_id, name, location, latitude, longitude*
 5. **time** - timestamps of records in **songplays** broken down into specific units
 * *start_time, hour, day, week, month, year, weekday
-It is organised as a start schema. The Entity Relation Diagram is as follows
+It is organised as a start schema, that simplifies queries about user activities. The Entity Relation Diagram is as follows
 ![alt text](./sparkify_schema.png)
 
-The diagram is generated using (Visual Paradigm)[https://online.visual-paradigm.com/diagrams/features/erd-tool/]. Primary keys are in bold font. I did not manage to do-undo italics to distinguish numerical entries...
+The diagram is generated using [Visual Paradigm](https://online.visual-paradigm.com/diagrams/features/erd-tool/). Primary keys are in bold font. I did not manage to do-undo italics to distinguish numerical entries...
 
 
 ## ETL Pipeline
- and writing an ETL pipeline that transfers data from files in two local directories into these tables in Postgres using Python and SQL.
+The ETL Pipeline is executed by running the ```etl.py``` file. It transfers data from files in two local directories into these tables in Postgres using Python and SQL. This is done by executing two similar functions, ```process_log_file``` and ```process_song_file```. The PostgreSQL queries for creating and inserting data are written out in the ```sql_queries.py``` file.
+
+### Process Song
+This function is applied to each ```.json``` file representing an element of our song dataset.
+1. Read the file as pandas dataframe
+2. Extract song data and insert them into the user_table
+
+### Process Log
+This function is applied to each ```.json``` file representing the activity on the app.
+1. Read the file as a pandas dataframe
+2. Filter by NextSong
+3. Convert timestamp column to datetime format 
+4. Split datetime to hour, day, week, month, year, weekday
+5. Extract user data and insert them into the user_table
+6. Extract songplay records (by querying the song_table and artist_table) and insert them into the songplay_table
 
 
 ## Usage

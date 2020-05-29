@@ -66,6 +66,8 @@ def process_log_file(cur, filepath):
             songid, artistid = None, None
 
         # insert songplay record
+
+    Discuss the purpose of this database in the context of the startup, Sparkify, and 
         songplay_data = (index,row.ts_date,row.userId,row.level,songid, artistid,row.sessionId,row.location,row.userAgent)
         cur.execute(songplay_table_insert, songplay_data)
 
